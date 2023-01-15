@@ -1,23 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { players as data } from "./components/data/player";
+import PlayerInfo from "./components/PlayerInfo";
+import Header from "./components/Header";
+import { useState } from "react";
 function App() {
+  const [players, setPlayers] = useState(data);
+  //add
+  const increamentHandler = (name) => {
+    console.log(name, "add");
+    const playerIndex = players.findIndex((player) => player.name === name);
+    players[playerIndex].score += 1;
+    sortScores();
+    setPlayers([...players]);
+  };
+
+  //min
+
+  const decreaseHandler = (name) => {
+    console.log(name, "min");
+    const playerIndex = players.findIndex((player) => player.name === name);
+    players[playerIndex].score -= 1;
+    sortScores();
+    setPlayers([...players]);
+  };
+
+  //sort
+  const sortScores = () => {
+    players.sort((player1, player2) => player2.score - player1.score);
+    setPlayers([...players]);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {players.map((player, index) => {
+        return (
+          <div key={index}>
+            <PlayerInfo
+              player={player}
+              add={increamentHandler}
+              min={decreaseHandler}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }
