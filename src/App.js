@@ -28,6 +28,12 @@ function App() {
     players.sort((player1, player2) => player2.score - player1.score);
     setPlayers([...players]);
   };
+
+  //delete
+  const deleteHandler = (name) => {
+    console.log(name, "delete");
+  };
+
   return (
     <div className="App">
       {players.map((player, index) => {
@@ -37,6 +43,7 @@ function App() {
               player={player}
               add={increamentHandler}
               min={decreaseHandler}
+              del={deleteHandler}
             />
           </div>
         );

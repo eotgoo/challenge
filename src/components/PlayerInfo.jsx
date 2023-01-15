@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function PlayerInfo(props) {
-  const { player, add, min } = props;
+  const { player, add, min, del } = props;
   return (
     <div>
       <div
@@ -16,6 +16,7 @@ export default function PlayerInfo(props) {
         <button onClick={() => add(player.name)}>+</button>
         {player.score}
         <button onClick={() => min(player.name)}>-</button>
+        <button onClick={() => del(player.name)}>{player.x}</button>
       </div>
     </div>
   );
